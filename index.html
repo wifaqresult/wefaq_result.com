@@ -5,103 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wifaq Result Interface</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 400px;
-            background-color: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        /* হেডার অংশ */
-        .header {
-            background-color: #1b7339;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .header p {
-            margin: 5px 0;
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        /* ফর্ম অংশ */
-        .form-body {
-            padding: 25px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 15px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group label span {
-            color: red;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            box-sizing: border-box; /* padding সহ সাইজ ঠিক রাখার জন্য */
-            color: #555;
-            background-color: #fafafa;
-        }
-
-        /* বাটন স্টাইল */
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 10px;
-            transition: background 0.3s;
-        }
-
-        .btn-reset {
-            background-color: #1b7339;
-            color: white;
-        }
-
-        .btn-search {
-            background-color: #1b7339;
-            color: white;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { width: 100%; max-width: 400px; background-color: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header { background-color: #1b7339; color: white; text-align: center; padding: 25px 15px; }
+        .header h1 { margin: 0; font-size: 20px; }
+        .form-body { padding: 25px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 10px; color: white; background-color: #1b7339; }
+        
+        /* রেজাল্ট কার্ড স্টাইল */
+        #resultArea { margin-top: 20px; display: none; width: 100%; max-width: 400px; background: white; padding: 20px; border-radius: 10px; border: 2px solid #1b7339; box-sizing: border-box; }
+        .result-success { color: green; font-weight: bold; font-size: 18px; text-align: center; }
+        .result-table { width: 100%; margin-top: 10px; border-collapse: collapse; }
+        .result-table td { padding: 8px; border-bottom: 1px solid #eee; }
     </style>
 </head>
 <body>
@@ -110,40 +28,47 @@
     <div class="header">
         <h1>বেফাকুল মাদারিসিল আরাবিয়া বাংলাদেশ</h1>
         <p>কওমী মাদ্রাসা শিক্ষাবোর্ড</p>
-        <p>২০৫, কাজলার পাড় (ভাঙ্গাপ্রেস), যাত্রাবাড়ী, ঢাকা-১২৩৬</p>
     </div>
 
     <div class="form-body">
         <div class="form-group">
-            <label>কেন্দ্রীয় পরীক্ষা নির্বাচন করুন <span>*</span></label>
-            <select>
-                <option>১৪৪৬ হিজরি / ১৪৩১ বঙ্গাব্দ / ২০২৫ ঈসাব্দ</option>
-            </select>
+            <label>রোল নম্বর (ইংরেজিতে)</label>
+            <input type="text" id="roll" placeholder="যেমন: 123456">
         </div>
-
         <div class="form-group">
-            <label>মারহালা নির্বাচন করুন <span>*</span></label>
-            <select>
-                <option>তাকমীল</option>
-                <option>ফজীলত</option>
-                <option>সানাবিয়া উলইয়া</option>
-            </select>
+            <label>রেজি নম্বর (ইংরেজিতে)</label>
+            <input type="text" id="reg" placeholder="যেমন: 987654">
         </div>
-
-        <div class="form-group">
-            <label>রোল নম্বর (ইংরেজিতে লিখুন) <span>*</span></label>
-            <input type="text" placeholder="XXXXXX">
-        </div>
-
-        <div class="form-group">
-            <label>রেজি নম্বর (ইংরেজিতে লিখুন) <span>*</span></label>
-            <input type="text" placeholder="XXXXXX">
-        </div>
-
-        <button class="btn btn-reset">পুনরায় সেট করুন</button>
-        <button class="btn btn-search">অনুসন্ধান করুন</button>
+        <button class="btn" onclick="checkResult()">অনুসন্ধান করুন</button>
     </div>
 </div>
+
+<div id="resultArea">
+    <div class="result-success">আলহামদুলিল্লাহ, আপনি উত্তীর্ণ হয়েছেন!</div>
+    <table class="result-table">
+        <tr><td><b>নাম:</b></td><td id="resName">আব্দুর রহমান</td></tr>
+        <tr><td><b>বিভাগ:</b></td><td>তাকমীল</td></tr>
+        <tr><td><b>গড় নম্বর:</b></td><td id="resMark">৮৫</td></tr>
+        <tr><td><b>ফল:</b></td><td>মুমতায (A+)</td></tr>
+    </table>
+</div>
+
+<script>
+    function checkResult() {
+        const roll = document.getElementById('roll').value;
+        const reg = document.getElementById('reg').value;
+        const resultArea = document.getElementById('resultArea');
+
+        // এখানে আপনি আপনার ডাটা সেট করতে পারেন
+        if (roll === "123456" && reg === "987654") {
+            resultArea.style.display = "block";
+            alert("রেজাল্ট পাওয়া গেছে!");
+        } else {
+            resultArea.style.display = "none";
+            alert("দুঃখিত! রোল বা রেজি নম্বর সঠিক নয়।");
+        }
+    }
+</script>
 
 </body>
 </html>
